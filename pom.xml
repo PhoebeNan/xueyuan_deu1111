@@ -4,6 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <modules>
         <module>xueyuan_eduservice1111</module>
+        <module>xueyuan_common1111</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -36,6 +37,17 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <!-- 修改后立即生效，热部署 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>springloaded</artifactId>
+            <version>1.2.8.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
         </dependency>
     </dependencies>
 
