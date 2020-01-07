@@ -31,7 +31,7 @@ public class Swagger2Config {
                 .title("网站-讲师管理API文档")
                 .description("本文档描述了讲师管理微服务接口定义")
                 .version("1.0")
-                .contact(new Contact("zyn", "http://zyn.com", "948207254@qq.com"))
+                .contact(new Contact("zyn", "http://zyn.com", "94820725@qq.com"))
                 .build();
     }
 }
