@@ -53,7 +53,8 @@ public class R {
         return this;
     }
 
-    public R data(String key, Object value){
+    public R
+    data(String key, Object value){
         this.data.put(key, value);
         return this;
     }

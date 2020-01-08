@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.online.edu.common.R;
 import com.online.edu.eduservice.entity.EduTeacher;
 import com.online.edu.eduservice.entity.QueryTeacher;
+import com.online.edu.eduservice.exception.EduException;
 import com.online.edu.eduservice.service.EduTeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,37 @@ public class EduTeacherController {
     @Autowired
     private EduTeacherService eduTeacherService;
 
+    /**
+     * 通过传入讲师eduTeacher对象的json数据来更新讲师的数据库字段
+     * @param eduTeacher
+     * @return
+     */
+    @PostMapping("updateByTeacher")
+    public R updateByTeacher(@RequestBody EduTeacher eduTeacher){
+        boolean updated = eduTeacherService.updateById(eduTeacher);
+        if (updated){
+            return R.ok();
+        }else {
+            return R.error();
+        }
+    }
+
+    /**
+     * 通过id查询讲师
+     * @param id
+     * @return
+     */
+    @GetMapping("findTeacherById/{id}")
+    public R findTeacherById(@PathVariable String id){
+        EduTeacher teacher = eduTeacherService.getById(id);
+        return R.ok().data("teacher", teacher);
+    }
+
+    /**
+     * 通过json格式添加讲师对象
+     * @param teacher
+     * @return
+     */
     @PostMapping("addTeacher")
     public R addTeacher(@RequestBody EduTeacher teacher){
 
@@ -54,6 +86,11 @@ public class EduTeacherController {
     public R getMoreConditionPageList(@PathVariable Long currentPage,
                                       @PathVariable Long size,
                                       @RequestBody(required = false) QueryTeacher queryTeacher){
+//        try {
+//            int i = 100/0;
+//        } catch (Exception e) {
+//            throw new EduException(2001, "执行的自定义异常");
+//        }
 
         Page<EduTeacher> page = new Page<>(currentPage, size);
 
