@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.online.edu.common.R;
 import com.online.edu.eduservice.entity.EduTeacher;
 import com.online.edu.eduservice.entity.QueryTeacher;
-import com.online.edu.eduservice.exception.EduException;
 import com.online.edu.eduservice.service.EduTeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,10 +25,24 @@ import java.util.Map;
 @RestController
 @RequestMapping("/eduservice/teacher")
 @Controller
+@CrossOrigin
 public class EduTeacherController {
 
     @Autowired
     private EduTeacherService eduTeacherService;
+
+    //{"code":20000,"data":{"token":"admin"}}
+    //模拟登陆
+    @PostMapping("login")
+    public R login() {
+        return R.ok().data("token","admin");
+    }
+
+    //{"code":20000,"data":{"roles":["admin"],"name":"admin","avatar":"https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif"}}
+    @GetMapping("info")
+    public R info() {
+        return R.ok().data("roles","[admin]").data("name","admin").data("avatar","https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+    }
 
     /**
      * 通过传入讲师eduTeacher对象的json数据来更新讲师的数据库字段
@@ -85,7 +98,7 @@ public class EduTeacherController {
     @PostMapping("moreConditionPageList/{currentPage}/{size}")
     public R getMoreConditionPageList(@PathVariable Long currentPage,
                                       @PathVariable Long size,
-                                      @RequestBody(required = false) QueryTeacher queryTeacher){
+                                      @RequestBody QueryTeacher queryTeacher){
 //        try {
 //            int i = 100/0;
 //        } catch (Exception e) {
@@ -105,6 +118,7 @@ public class EduTeacherController {
         long totalTeachers = page.getTotal(); //总条数
         List<EduTeacher> teacherRecords = page.getRecords();
 
+        System.out.println(teacherRecords);
         Map<String, Object> map = new HashMap<>();
         map.put("pages",pages);
         map.put("totalTeachers",totalTeachers);
@@ -133,10 +147,12 @@ public class EduTeacherController {
      * @param id
      * @return
      */
-    @DeleteMapping("{id}")
+    @DeleteMapping("deleteTeacher/{id}")
     public boolean deleteTeacherById(@PathVariable String id){
 
         boolean b = eduTeacherService.removeById(id);
+        System.out.println("=============");
+        System.out.println(b);
         return b;
     }
 

@@ -7,6 +7,6 @@ public class QueryTeacher {
 
     private String name;
     private String level;
-    private String startTime;
-    private String endTime;
+    private String begin;
+    private String end;
 }

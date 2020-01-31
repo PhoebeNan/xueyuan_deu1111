@@ -30,8 +30,8 @@ public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeac
         }
         String name = queryTeacher.getName();
         String level = queryTeacher.getLevel();
-        String startTime = queryTeacher.getStartTime();
-        String endTime = queryTeacher.getEndTime();
+        String startTime = queryTeacher.getBegin();
+        String endTime = queryTeacher.getEnd();
 
         //构造 条件构造器进行拼接查询条件
         QueryWrapper<EduTeacher> wrapper = new QueryWrapper<>();
