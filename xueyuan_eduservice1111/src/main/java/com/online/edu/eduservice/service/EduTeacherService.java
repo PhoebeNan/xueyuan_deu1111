@@ -21,4 +21,6 @@ public interface EduTeacherService extends IService<EduTeacher> {
      * @param queryTeacher
      */
     void getMoreConditionPageList(Page<EduTeacher> page, QueryTeacher queryTeacher);
+
+    boolean deleteTeacherById(String id);
 }
