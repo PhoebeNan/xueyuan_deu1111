@@ -38,6 +38,7 @@ public class EduTeacherController {
     @Autowired
     private EduTeacherService eduTeacherService;
 
+    //上传头像
     @PostMapping("upload")
     public R fileUpload(@RequestParam("file") MultipartFile file) {
 

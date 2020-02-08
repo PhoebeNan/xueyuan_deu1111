@@ -7,6 +7,7 @@ import java.util.Map;
 
 /**
  * 定义具体的数据返回格式
+ *
  * @author zhaoyanan
  * @create 2020-01-07-15:20
  */
@@ -16,10 +17,10 @@ public class R {
     private Boolean success;
     private Integer code;
     private String message;
-    private Map<String,Object> data = new HashMap<>();
+    private Map<String, Object> data = new HashMap<>();
 
     //操作成功，调用这个方法，返回成功的数据
-    public static R ok(){
+    public static R ok() {
         R r = new R();
         r.setSuccess(true);
         r.setCode(ResultCode.SUCCESS);
@@ -29,7 +30,7 @@ public class R {
     }
 
     //操作失败，调用这个方法，返回失败的数据
-    public static R error(){
+    public static R error() {
         R r = new R();
         r.setSuccess(false);
         r.setCode(ResultCode.ERROR);
@@ -38,28 +39,27 @@ public class R {
     }
 
     //使用链式编程
-    public R success(Boolean success){
+    public R success(Boolean success) {
         this.setSuccess(success);
         return this;
     }
 
-    public R message(String message){
+    public R message(String message) {
         this.setMessage(message);
         return this;
     }
 
-    public R code(Integer code){
+    public R code(Integer code) {
         this.setCode(code);
         return this;
     }
 
-    public R
-    data(String key, Object value){
+    public R data(String key, Object value) {
         this.data.put(key, value);
         return this;
     }
 
-    public R data(Map<String, Object> map){
+    public R data(Map<String, Object> map) {
         this.setData(map);
         return this;
     }
