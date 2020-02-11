@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.ByteArrayInputStream;
-
+import java.util.Random;
 /**
  * @author zhaoyanan
  * @create 2020-02-01-12:58
@@ -71,5 +71,16 @@ public class CreateOss {
 
         // 关闭OSSClient。
         ossClient.shutdown();
+    }
+
+
+    @Test
+    public void test(){
+
+        Random random = new Random();
+
+        int i = random.nextInt(100);
+
+        System.out.println(i);
     }
 }

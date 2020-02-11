@@ -24,11 +24,17 @@ public class ConstantPropertiesUtil implements InitializingBean {
     @Value("${aliyun.oss.file.bucketname}")
     private String bucketName;
 
+    @Value("${aliyun.oss.file.host}")
+    private String host;
+
+
+
     //定义常量
     public static String END_POINT;
     public static String ACCESS_KEY_ID;
     public static String ACCESS_KEY_SECRET;
     public static String BUCKET_NAME;
+    public static String HOST;
 
     @Override
     public void afterPropertiesSet() throws Exception {
@@ -37,5 +43,6 @@ public class ConstantPropertiesUtil implements InitializingBean {
         ACCESS_KEY_ID = keyId;
         ACCESS_KEY_SECRET = keySecret;
         BUCKET_NAME = bucketName;
+        HOST = host;
     }
 }
