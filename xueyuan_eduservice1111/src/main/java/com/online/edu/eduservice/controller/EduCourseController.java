@@ -28,7 +28,23 @@ public class EduCourseController {
     @Autowired
     private EduCourseService eduCourseService;
 
+    //5.删除课程的方法
+    @DeleteMapping("deleteCourse/{id}")
+    public R deleteCourse(@PathVariable String id){
+
+        boolean flag =eduCourseService.deleteCourseById(id);
+
+        if (flag){
+            //删除成功
+            return R.ok();
+        }else {
+            //删除失败
+            return R.error();
+        }
+    }
+
     //4.查询所有的课程
+    //TODO 待完善列表带分页，条件查询
     @GetMapping("listCourse")
     public R getAllCourse(){
 

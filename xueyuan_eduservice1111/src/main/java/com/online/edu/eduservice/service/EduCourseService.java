@@ -43,4 +43,10 @@ public interface EduCourseService extends IService<EduCourse> {
      */
     List<EduCourse> getAllCourse();
 
+    /**
+     * 删除课程的方法
+     * @param id
+     * @return
+     */
+    boolean deleteCourseById(String id);
 }
