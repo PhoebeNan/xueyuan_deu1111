@@ -28,4 +28,11 @@ public interface EduChapterService extends IService<EduChapter> {
      * @return
      */
     List<EduChapterDto> getChapterVideoList(String courseId);
+
+    /**
+     * 自定义删除方法，如果章节中有小节则不删除
+     * @param chapterId
+     * @return
+     */
+    boolean removeChapterById(String chapterId);
 }

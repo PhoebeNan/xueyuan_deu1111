@@ -6,6 +6,7 @@ import com.online.edu.eduservice.entity.EduChapter;
 import com.online.edu.eduservice.entity.EduVideo;
 import com.online.edu.eduservice.entity.dto.EduChapterDto;
 import com.online.edu.eduservice.entity.dto.EduVideoDto;
+import com.online.edu.eduservice.exception.EduException;
 import com.online.edu.eduservice.mapper.EduChapterMapper;
 import com.online.edu.eduservice.service.EduChapterService;
 import com.online.edu.eduservice.service.EduVideoService;
@@ -30,6 +31,7 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
     @Autowired
     private EduVideoService eduVideoService;
 
+    //课程列表页面中的删除方法
     @Override
     public void deleteChapter(String id) {
         QueryWrapper<EduChapter> wrapper = new QueryWrapper<>();
@@ -84,5 +86,24 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
         }
 
         return chapterDtos;
+    }
+
+    //自定义删除方法，如果章节中有小节则不删除
+    //发布课程中创建课程大纲中的删除方法
+    @Override
+    public boolean removeChapterById(String chapterId) {
+
+        //判断章节里面是否有小节
+        QueryWrapper<EduVideo> wrapper = new QueryWrapper<>();
+        wrapper.eq("chapter_id", chapterId);
+        int count = eduVideoService.count(wrapper);
+        if (count > 0) {
+            //有小节，不删除
+            throw new EduException(20001, "删除失败");
+        }
+        //若没有小节，则进行删除章节
+        int deleteById = baseMapper.deleteById(chapterId);
+
+        return deleteById > 0;
     }
 }

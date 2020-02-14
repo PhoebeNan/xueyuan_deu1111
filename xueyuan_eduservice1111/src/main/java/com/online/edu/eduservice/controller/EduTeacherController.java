@@ -40,61 +40,61 @@ public class EduTeacherController {
     private EduTeacherService eduTeacherService;
 
     //上传头像
-    @PostMapping("upload")
-    public R fileUpload(@RequestParam("file") MultipartFile file,
-                        @RequestParam(value = "host", required = false) String host) {
-
-        // Endpoint以杭州为例，其它Region请按实际情况填写。
-        String endpoint = ConstantPropertiesUtil.END_POINT;
-        // 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录 https://ram.console.aliyun.com 创建RAM账号。
-        String accessKeyId = ConstantPropertiesUtil.ACCESS_KEY_ID;
-        String accessKeySecret = ConstantPropertiesUtil.ACCESS_KEY_SECRET;
-
-        String bucketName = ConstantPropertiesUtil.BUCKET_NAME;
-
-        // 创建OSSClient实例。
-        OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
-
-        try {
-            //获取文件的名称
-            String originalFilename = file.getOriginalFilename();
-
-            //保证每个文件名称都不一样
-            originalFilename = UUID.randomUUID().toString() + originalFilename;
-
-            //获取当前日期
-            String pathDate = new DateTime().toString("yyyy/MM/dd");
-            originalFilename = pathDate + "/" + originalFilename;
-
-            String hostName = ConstantPropertiesUtil.HOST;
-
-            //如果是上传头像，host为空，若是封面，则有值不为空
-            if (StringUtils.isNotBlank(host)) {
-                //不为空
-                hostName = host;
-            }
-            originalFilename = pathDate + "/" + hostName + "/" + originalFilename;
-
-
-            //获取文件流
-            InputStream in = file.getInputStream();
-            ossClient.putObject(bucketName, originalFilename, in);
-
-            // 关闭OSSClient。
-            ossClient.shutdown();
-
-
-            //返回上传后oss存储的路径
-            //https://zyn-edu-test1112.oss-cn-hangzhou.aliyuncs.com/abc/1.txt
-            String path = "http://" + bucketName + "." + endpoint + "/" + originalFilename;
-
-            return R.ok().data("imgUrl", path);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            return R.error();
-        }
-    }
+//    @PostMapping("upload")
+//    public R fileUpload(@RequestParam("file") MultipartFile file,
+//                        @RequestParam(value = "host", required = false) String host) {
+//
+//        // Endpoint以杭州为例，其它Region请按实际情况填写。
+//        String endpoint = ConstantPropertiesUtil.END_POINT;
+//        // 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录 https://ram.console.aliyun.com 创建RAM账号。
+//        String accessKeyId = ConstantPropertiesUtil.ACCESS_KEY_ID;
+//        String accessKeySecret = ConstantPropertiesUtil.ACCESS_KEY_SECRET;
+//
+//        String bucketName = ConstantPropertiesUtil.BUCKET_NAME;
+//
+//        // 创建OSSClient实例。
+//        OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+//
+//        try {
+//            //获取文件的名称
+//            String originalFilename = file.getOriginalFilename();
+//
+//            //保证每个文件名称都不一样
+//            originalFilename = UUID.randomUUID().toString() + originalFilename;
+//
+//            //获取当前日期
+//            String pathDate = new DateTime().toString("yyyy/MM/dd");
+//            originalFilename = pathDate + "/" + originalFilename;
+//
+//            String hostName = ConstantPropertiesUtil.HOST;
+//
+//            //如果是上传头像，host为空，若是封面，则有值不为空
+//            if (StringUtils.isNotBlank(host)) {
+//                //不为空
+//                hostName = host;
+//            }
+//            originalFilename = pathDate + "/" + hostName + "/" + originalFilename;
+//
+//
+//            //获取文件流
+//            InputStream in = file.getInputStream();
+//            ossClient.putObject(bucketName, originalFilename, in);
+//
+//            // 关闭OSSClient。
+//            ossClient.shutdown();
+//
+//
+//            //返回上传后oss存储的路径
+//            //https://zyn-edu-test1112.oss-cn-hangzhou.aliyuncs.com/abc/1.txt
+//            String path = "http://" + bucketName + "." + endpoint + "/" + originalFilename;
+//
+//            return R.ok().data("imgUrl", path);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            return R.error();
+//        }
+//    }
 
     //{"code":20000,"data":{"token":"admin"}}
     //模拟登陆
