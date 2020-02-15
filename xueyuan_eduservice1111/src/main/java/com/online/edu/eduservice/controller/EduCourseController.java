@@ -3,6 +3,7 @@ package com.online.edu.eduservice.controller;
 
 import com.online.edu.common.R;
 import com.online.edu.eduservice.entity.EduCourse;
+import com.online.edu.eduservice.entity.dto.CourseFourTableDto;
 import com.online.edu.eduservice.entity.dto.OneSubjectDto;
 import com.online.edu.eduservice.entity.form.CourseInfoForm;
 import com.online.edu.eduservice.service.EduCourseService;
@@ -27,6 +28,16 @@ public class EduCourseController {
 
     @Autowired
     private EduCourseService eduCourseService;
+
+    //6.根据课程id查询课程详细信息，涉及四张表
+
+    @GetMapping("getAllCourseFourTable/{courseId}")
+    public R getAllCourseFourTale(@PathVariable String courseId){
+
+        CourseFourTableDto courseFourTableDto =eduCourseService.getAllCourseFourTable(courseId);
+
+        return R.ok().data("courseList",courseFourTableDto);
+    }
 
     //5.删除课程的方法
     @DeleteMapping("deleteCourse/{id}")

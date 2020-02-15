@@ -2,4 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.online.edu.eduservice.mapper.EduCourseMapper">
 
+    <!--根据课程id查询课程详细信息，涉及四张表-->
+    <select id="getCourseFourTableDto" resultType="com.online.edu.eduservice.entity.dto.CourseFourTableDto">
+        SELECT
+         c.id,
+         c.title,
+         c.price,
+         c.cover,
+         cd.description,
+         t.name teacherName,
+         s1.title levelOne,
+         s2.title levelTwo
+        FROM
+            edu_course c
+         LEFT OUTER JOIN edu_course_description cd ON c.id = cd.id
+         LEFT OUTER JOIN edu_teacher t ON c.teacher_id = t.id
+         LEFT OUTER JOIN edu_subject s1 ON c.subject_parent_id = s1.id
+         LEFT OUTER JOIN edu_subject s2 ON c.subject_id = s2.id
+         WHERE c.id = #{courseId}
+    </select>
 </mapper>

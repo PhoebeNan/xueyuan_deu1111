@@ -2,6 +2,7 @@ package com.online.edu.eduservice.service.impl;
 
 import com.online.edu.eduservice.entity.EduCourse;
 import com.online.edu.eduservice.entity.EduCourseDescription;
+import com.online.edu.eduservice.entity.dto.CourseFourTableDto;
 import com.online.edu.eduservice.entity.form.CourseInfoForm;
 import com.online.edu.eduservice.exception.EduException;
 import com.online.edu.eduservice.mapper.EduCourseMapper;
@@ -35,6 +36,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 
     @Autowired
     private EduVideoService eduVideoService;
+
 
     //添加课程信息的方法
     @Override
@@ -129,5 +131,12 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         int resRow = baseMapper.deleteById(id);
 
         return resRow > 0;
+    }
+
+    //根据课程id查询课程详细信息，涉及四张表
+    @Override
+    public CourseFourTableDto getAllCourseFourTable(String courseId) {
+
+        return baseMapper.getCourseFourTableDto(courseId);
     }
 }

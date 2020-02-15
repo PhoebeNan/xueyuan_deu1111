@@ -2,6 +2,7 @@ package com.online.edu.eduservice.mapper;
 
 import com.online.edu.eduservice.entity.EduCourse;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.online.edu.eduservice.entity.dto.CourseFourTableDto;
 
 /**
  * <p>
@@ -12,5 +13,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2020-02-09
  */
 public interface EduCourseMapper extends BaseMapper<EduCourse> {
+
+    //根据课程id查询课程详细信息，涉及四张表
+    CourseFourTableDto getCourseFourTableDto(String courseId);
 
 }

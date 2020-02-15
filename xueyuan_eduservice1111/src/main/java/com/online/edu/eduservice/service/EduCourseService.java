@@ -2,6 +2,7 @@ package com.online.edu.eduservice.service;
 
 import com.online.edu.eduservice.entity.EduCourse;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.online.edu.eduservice.entity.dto.CourseFourTableDto;
 import com.online.edu.eduservice.entity.form.CourseInfoForm;
 
 import java.util.List;
@@ -49,4 +50,11 @@ public interface EduCourseService extends IService<EduCourse> {
      * @return
      */
     boolean deleteCourseById(String id);
+
+    /**
+     * 根据课程id查询课程详细信息，涉及四张表
+     * @param courseId
+     * @return
+     */
+    CourseFourTableDto getAllCourseFourTable(String courseId);
 }
