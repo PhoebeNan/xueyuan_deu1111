@@ -5,6 +5,7 @@
     <modules>
         <module>xueyuan_eduservice1111</module>
         <module>xueyuan_common1111</module>
+        <module>videoAliyunDemo</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -96,6 +97,16 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
     </build>
 
 </project>

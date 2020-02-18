@@ -27,9 +27,10 @@ import lombok.Data;
 @Data
 public class CourseFourTableDto {
 
-    private String courseId;
+    private String id; //courseId
     private String title;
     private String cover;
+    private String price;
     private String description;
     private String teacherName; //课程讲师
     private String levelOne;  //课程一级分类

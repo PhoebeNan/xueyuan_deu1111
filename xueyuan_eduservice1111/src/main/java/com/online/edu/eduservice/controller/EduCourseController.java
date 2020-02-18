@@ -29,10 +29,26 @@ public class EduCourseController {
     @Autowired
     private EduCourseService eduCourseService;
 
-    //6.根据课程id查询课程详细信息，涉及四张表
+    //7.发布课程后修改发布的状态
+    @GetMapping("updateCourseStatus/{courseId}")
+    public R updateCourseStatus(@PathVariable String courseId){
 
+        EduCourse eduCourse = new EduCourse();
+        eduCourse.setId(courseId);
+        eduCourse.setStatus("Normal");
+        boolean flag =eduCourseService.updateById(eduCourse);
+        if (flag){
+            //修改发布的状态成功
+            return R.ok();
+        }else {
+            //修改发布的状态失败
+            return R.error();
+        }
+    }
+
+    //6.根据课程id查询课程详细信息，涉及四张表
     @GetMapping("getAllCourseFourTable/{courseId}")
-    public R getAllCourseFourTale(@PathVariable String courseId){
+    public R getAllCourseFourTable(@PathVariable String courseId){
 
         CourseFourTableDto courseFourTableDto =eduCourseService.getAllCourseFourTable(courseId);
 

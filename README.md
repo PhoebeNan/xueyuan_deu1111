@@ -2,6 +2,9 @@
 #swagger访问接口
 http://localhost:8001/swagger-ui.html
 
+mvn 引入jar到本地仓库 命令
+mvn install:install-file -DgroupId=com.aliyun -DartifactId=aliyun-sdk-vod-upload -Dversion=1.4.6 -Dpackaging=jar -Dfile=aliyun-java-vod-upload-1.4.6.jar
+
 #maven插件爆红线后的下载地址
 http://repo1.maven.org/maven2/org/apache/maven/plugins/maven-site-plugin/3.6/
 

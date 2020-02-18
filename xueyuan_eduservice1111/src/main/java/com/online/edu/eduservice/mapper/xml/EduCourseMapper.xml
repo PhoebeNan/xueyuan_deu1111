@@ -7,7 +7,7 @@
         SELECT
          c.id,
          c.title,
-         c.price,
+         CONVERT(c.price,DECIMAL(8,2)) AS price,
          c.cover,
          cd.description,
          t.name teacherName,
