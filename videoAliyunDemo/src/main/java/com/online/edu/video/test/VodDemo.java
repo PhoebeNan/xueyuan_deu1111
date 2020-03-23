@@ -24,7 +24,7 @@ public class VodDemo {
 
     //1.音视频上传-本地文件上传
     //视频标题(必选)
-    private static String title = "a";
+    private static String title = "aaa";
     //本地文件上传和文件流上传时，文件名称为上传文件绝对路径，如:/User/sample/文件名称.mp4 (必选)
     //文件名必须包含扩展名
     private static String fileName = "E:\\a-workspace\\项目实战\\11.谷粒在线教育项目\\王泽在线教育\\资源\\1-阿里云上传测试视频\\6 - What If I Want to Move Faster.mp4";
@@ -45,8 +45,9 @@ public class VodDemo {
 
         try {
 
+            request.setAuthInfoTimeout(200L);
             //设置请求参数
-            request.setVideoId("319ba7eb56554d6590e1d04685c99b01");
+            request.setVideoId("9d344a9e595b46c2935e7eeab6a5b354");
             //获取请求响应
             response = client.getAcsResponse(request);
 
@@ -101,5 +102,7 @@ public class VodDemo {
             System.out.print("ErrorMessage=" + response.getMessage() + "\n");
         }
     }
+
+
 
 }

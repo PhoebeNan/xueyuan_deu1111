@@ -1,28 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <artifactId>xueyuan_deu1111</artifactId>
         <groupId>com.online.edu</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>videoAliyunDemo</artifactId>
+    <groupId>com.online.edu</groupId>
+    <artifactId>xueyuan_videoservice</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>xueyuan_videoservice</name>
+    <description>Demo project for Spring Boot</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
 
     <dependencies>
+
+
+        <!--xueyuan_common1111依赖-->
         <dependency>
-            <groupId>org.apache.httpcomponents</groupId>
-            <artifactId>httpclient</artifactId>
-            <version>4.5.1</version>
+            <groupId>com.online.edu</groupId>
+            <artifactId>xueyuan_common1111</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
 
         <!--使用SDK-->
 <!--        <dependency>-->
@@ -33,18 +55,18 @@
 <!--        <dependency>-->
 <!--            <groupId>com.aliyun</groupId>-->
 <!--            <artifactId>aliyun-java-sdk-vod</artifactId>-->
-<!--            <version>2.15.1</version>-->
+<!--            <version>2.15.5</version>-->
 <!--        </dependency>-->
-<!--        &lt;!&ndash;aliyunOSS&ndash;&gt;-->
+        <!--aliyunOSS-->
 <!--        <dependency>-->
 <!--            <groupId>com.aliyun.oss</groupId>-->
 <!--            <artifactId>aliyun-sdk-oss</artifactId>-->
-<!--            <version>3.8.0</version>-->
+<!--            <version>3.1.0</version>-->
 <!--        </dependency>-->
 <!--        <dependency>-->
 <!--            <groupId>com.aliyun</groupId>-->
 <!--            <artifactId>aliyun-sdk-vod-upload</artifactId>-->
-<!--            <version>1.4.11</version>-->
+<!--            <version>1.4.6</version>-->
 <!--        </dependency>-->
 <!--        <dependency>-->
 <!--            <groupId>com.google.code.gson</groupId>-->
@@ -58,6 +80,7 @@
 <!--        </dependency>-->
 
 
+
         <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-core</artifactId>
@@ -66,7 +89,7 @@
         <dependency>
             <groupId>com.aliyun.oss</groupId>
             <artifactId>aliyun-sdk-oss</artifactId>
-            <version>3.1.0</version>
+            <version>2.8.3</version>
         </dependency>
         <dependency>
             <groupId>com.aliyun</groupId>
@@ -88,6 +111,8 @@
             <artifactId>aliyun-sdk-vod-upload</artifactId>
             <version>1.4.6</version>
         </dependency>
+
+
     </dependencies>
 
     <repositories>
@@ -103,5 +128,14 @@
             </snapshots>
         </repository>
     </repositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
