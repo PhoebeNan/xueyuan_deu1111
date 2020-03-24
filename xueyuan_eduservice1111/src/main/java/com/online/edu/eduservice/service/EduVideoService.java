@@ -17,9 +17,9 @@ public interface EduVideoService extends IService<EduVideo> {
 
     /**
      * 根据课程id删除小节，小节表中存储的有课程id
-     * @param id
+     * @param courseId
      */
-    void deleteVideo(String id);
+    void deleteVideo(String courseId);
 
     /**
      * 根据课程id查询小节
@@ -29,9 +29,9 @@ public interface EduVideoService extends IService<EduVideo> {
     List<EduVideo> getVideoListByCourseId(String courseId);
 
     /**
-     * 根据课程id删除小节
-     * @param videoId
+     * 根据小节id删除小节
+     * @param xiaoJieId
      * @return
      */
-    boolean removeVideoById(String videoId);
+    boolean removeVideoById(String xiaoJieId);
 }

@@ -7,6 +7,9 @@ import com.aliyuncs.vod.model.v20170321.DeleteStreamRequest;
 import com.aliyuncs.vod.model.v20170321.DeleteStreamResponse;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoRequest;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoResponse;
+import org.apache.commons.lang.StringUtils;
+
+import java.util.List;
 
 /**
  * 阿里云视频点播sdk初始化操作类
@@ -44,6 +47,23 @@ public class AliyunVodSDKUtils {
         DeleteVideoRequest request = new DeleteVideoRequest();
         //支持传入多个视频ID，多个用逗号分隔
         request.setVideoIds(videoIds);
+        return client.getAcsResponse(request);
+    }
+
+
+    /**
+     * 删除多个视频
+     * @param client 发送请求客户端
+     * @return DeleteVideoResponse 删除视频响应数据
+     * @throws Exception
+     */
+    public static DeleteVideoResponse deleteVideoBatch(DefaultAcsClient client, List<String> videoIds) throws Exception {
+        DeleteVideoRequest request = new DeleteVideoRequest();
+
+        String videoIdsJoin = StringUtils.join(videoIds, ",");
+
+        //支持传入多个视频ID，多个用逗号分隔
+        request.setVideoIds(videoIdsJoin);
         return client.getAcsResponse(request);
     }
 

@@ -29,7 +29,7 @@ public class EduVideo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "视频ID")
+    @ApiModelProperty(value = "小节ID")
     @TableId(value = "id", type = IdType.ID_WORKER_STR)
     private String id;
 
@@ -51,7 +51,7 @@ public class EduVideo implements Serializable {
     @ApiModelProperty(value = "是否可以试听：0免费 1收费")
     private Boolean isFree;
 
-    @ApiModelProperty(value = "视频资源")
+    @ApiModelProperty(value = "视频id")
     private String videoSourceId;
 
     @ApiModelProperty(value = "视频时长（秒）")

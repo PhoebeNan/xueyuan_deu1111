@@ -4,8 +4,6 @@ import com.aliyun.vod.upload.impl.UploadVideoImpl;
 import com.aliyun.vod.upload.req.UploadStreamRequest;
 import com.aliyun.vod.upload.resp.UploadStreamResponse;
 import com.aliyuncs.DefaultAcsClient;
-import com.aliyuncs.exceptions.ClientException;
-import com.aliyuncs.vod.model.v20170321.DeleteStreamResponse;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoResponse;
 import com.online.edu.service.VidService;
 import com.online.edu.utils.AliyunVodSDKUtils;
@@ -15,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * @author NanCoder
@@ -74,6 +73,22 @@ public class VidServiceImpl implements VidService {
             response = new DeleteVideoResponse();
 
             response = AliyunVodSDKUtils.deleteVideo(client, deleteVideoId);
+        } catch (Exception e) {
+            System.out.print("ErrorMessage = " + e.getLocalizedMessage());
+        }
+        assert response != null;
+        System.out.print("RequestId = " + response.getRequestId() + "\n");
+    }
+
+    @Override
+    public void deleteVideoIdBatch(List<String> videoIdList) {
+
+        DeleteVideoResponse response = null;
+        try {
+            DefaultAcsClient client = AliyunVodSDKUtils.initVodClient(ConstantPropertiesUtil.ACCESS_KEY_ID, ConstantPropertiesUtil.ACCESS_KEY_SECRET);
+            response = new DeleteVideoResponse();
+
+            response = AliyunVodSDKUtils.deleteVideoBatch(client, videoIdList);
         } catch (Exception e) {
             System.out.print("ErrorMessage = " + e.getLocalizedMessage());
         }

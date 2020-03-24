@@ -59,6 +59,35 @@
             <version>2.10.1</version>
         </dependency>
 
+        <!--服务注册-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+
+        <!--        开启声明式调用feign,可以使用fegin远程调度其他provider提供服务-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+
+        <!--使用Hystrix Dashboard监控熔断器的状态-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -67,7 +96,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-<!--                    明确表示编译版本配置有效-->
+                    <!--                    明确表示编译版本配置有效-->
                     <fork>true</fork>
                     <mainClass>com.online.edu.eduservice.EduServiceApplication</mainClass>
                 </configuration>
@@ -81,7 +110,7 @@
             </plugin>
         </plugins>
 
-<!--        讲mapper对应的xml文件编译后放入到字节码所以在的目录中-->
+        <!--        讲mapper对应的xml文件编译后放入到字节码所以在的目录中-->
         <resources>
             <resource>
                 <directory>src/main/java</directory>

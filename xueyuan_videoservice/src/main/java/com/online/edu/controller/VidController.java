@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 /**
  * @author NanCoder
  * @create 2020-03-23-10:09
@@ -18,6 +20,16 @@ public class VidController {
 
     @Autowired
     private VidService vidService;
+
+    //3.通过videoId删除阿里云服务器上的多个视频，批量删除视频，一次只能批量删20个
+    @DeleteMapping("removeVideoList")
+    public R deleteVideoIdBatch(@ApiParam(name = "videoIdList", value = "云端视频多个id", required = true)
+                           @RequestParam("videoIdList") List<String> videoIdList){
+
+        vidService.deleteVideoIdBatch(videoIdList);
+
+        return R.ok();
+    }
 
     //2.通过videoId删除阿里云服务器上的视频
     @DeleteMapping("{deleteVideoId}")
