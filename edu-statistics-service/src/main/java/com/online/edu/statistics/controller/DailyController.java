@@ -2,9 +2,12 @@ package com.online.edu.statistics.controller;
 
 
 import com.online.edu.common.R;
+import com.online.edu.statistics.dto.SearchStatisticsObjDto;
 import com.online.edu.statistics.service.DailyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 /**
  * <p>
@@ -22,6 +25,7 @@ public class DailyController {
     @Autowired
     private DailyService dailyService;
 
+    //1.使用fegin调用xueyuan-ucenter-service微服务模块向数据库中插入统计一天中注册人数的数据
     @GetMapping("memberRegisterCount/{day}")
     public R getMemberRegisterCountStatisticController(@PathVariable("day") String day){
 
@@ -30,17 +34,13 @@ public class DailyController {
         return R.ok().data("memberRegisterCount",memberRegisterCount);
     }
 
-    //{"code":20000,"data":{"token":"admin"}}
-    //模拟登陆
-    @PostMapping("login")
-    public R login() {
-        return R.ok().data("token", "admin");
-    }
+    //2.前端传来查询条件，后端传回一个map，其中包含了统计日期集合(List)和注册人数或登录人数或其他统计信息集合(List)
+    @PostMapping("getStatisticsCountMap")
+    public R getStatisticsCountMap(@RequestBody SearchStatisticsObjDto searchStatisticsObj){
 
-    //{"code":20000,"data":{"roles":["admin"],"name":"admin","avatar":"https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif"}}
-    @GetMapping("info")
-    public R info() {
-        return R.ok().data("roles", "[admin]").data("name", "admin").data("avatar", "https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
+        Map<String,Object> statisticsCountMap = dailyService.getStatisticsCountMap(searchStatisticsObj);
+
+        return R.ok().data(statisticsCountMap);
     }
 
 }

@@ -2,6 +2,8 @@
 #swagger访问接口
 http://localhost:8001/swagger-ui.html
 
+https://www.npmjs.com/package/vue-awesome-swiper  解决轮播图问题vue-awesome-swiper
+
 #nginx地址
 D:\day01Movie\leiyou_tools\nginx-1.12.2
 
