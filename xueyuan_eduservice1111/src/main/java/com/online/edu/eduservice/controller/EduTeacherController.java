@@ -145,13 +145,13 @@ public class EduTeacherController {
      * 3.分页查询讲师列表
      *
      * @param currentPage 当前页
-     * @param size 每页的数据量
+     * @param pageSize 每页的数据量
      * @return
      */
-    @GetMapping("pageList/{currentPage}/{size}")
-    public R getPageAllEduTeacherList(@PathVariable Long currentPage, @PathVariable Long size) {
+    @GetMapping("pageList/{currentPage}/{pageSize}")
+    public R getPageAllEduTeacherList(@PathVariable Long currentPage, @PathVariable Long pageSize) {
 
-        Page<EduTeacher> pageTeacher = new Page<>(currentPage, size);
+        Page<EduTeacher> pageTeacher = new Page<>(currentPage, pageSize);
         eduTeacherService.page(pageTeacher, null);
 
         return getPages(pageTeacher);
