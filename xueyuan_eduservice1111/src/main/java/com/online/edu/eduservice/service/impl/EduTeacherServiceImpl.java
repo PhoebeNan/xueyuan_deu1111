@@ -10,6 +10,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.List;
+
 /**
  * <p>
  * 讲师 服务实现类
@@ -57,5 +60,34 @@ public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeac
 
         int result = baseMapper.deleteById(id);
         return result > 0;
+    }
+
+    @Override
+    public HashMap<String, Object> getFrontTeachersMap(Page<EduTeacher> paramPage) {
+
+        QueryWrapper<EduTeacher> wrapper = new QueryWrapper<>();
+        wrapper.orderByAsc("sort");
+        baseMapper.selectPage(paramPage,wrapper);
+
+        HashMap<String, Object> fronTeachersMap = new HashMap<>();
+
+        long pageCurrent = paramPage.getCurrent();//当前页码
+        long pageSize = paramPage.getSize();//每页有多少条数据
+        long totalPage = paramPage.getPages();//总页数
+        long totalNums = paramPage.getTotal();//总条数
+        List<EduTeacher> totalRecords = paramPage.getRecords();//总记录数，所有记录数
+        boolean previous = paramPage.hasPrevious();//是否有前一页
+        boolean next = paramPage.hasNext();//是否有后一页
+
+
+        fronTeachersMap.put("pageCurrent",pageCurrent);
+        fronTeachersMap.put("pageSize",pageSize);
+        fronTeachersMap.put("totalPage",totalPage);
+        fronTeachersMap.put("totalNums",totalNums);
+        fronTeachersMap.put("totalRecords",totalRecords);
+        fronTeachersMap.put("previous",previous);
+        fronTeachersMap.put("next",next);
+
+        return fronTeachersMap;
     }
 }

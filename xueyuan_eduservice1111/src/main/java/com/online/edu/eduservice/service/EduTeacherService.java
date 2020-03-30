@@ -5,6 +5,8 @@ import com.online.edu.eduservice.entity.EduTeacher;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.online.edu.eduservice.entity.QueryTeacher;
 
+import java.util.HashMap;
+
 /**
  * <p>
  * 讲师 服务类
@@ -22,5 +24,17 @@ public interface EduTeacherService extends IService<EduTeacher> {
      */
     void getMoreConditionPageList(Page<EduTeacher> page, QueryTeacher queryTeacher);
 
+    /**
+     * 通过id删除一个讲师
+     * @param id
+     * @return
+     */
     boolean deleteTeacherById(String id);
+
+    /**
+     * 前台系统实现讲师分页功能
+     * @param paramPage
+     * @return
+     */
+    HashMap<String, Object> getFrontTeachersMap(Page<EduTeacher> paramPage);
 }
