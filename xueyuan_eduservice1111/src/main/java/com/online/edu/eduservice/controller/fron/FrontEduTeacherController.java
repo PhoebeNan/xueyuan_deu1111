@@ -2,6 +2,7 @@ package com.online.edu.eduservice.controller.fron;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.online.edu.common.R;
+import com.online.edu.eduservice.entity.EduCourse;
 import com.online.edu.eduservice.entity.EduTeacher;
 import com.online.edu.eduservice.service.EduTeacherService;
 import io.swagger.annotations.ApiOperation;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * 前台讲师controller
@@ -19,11 +21,28 @@ import java.util.HashMap;
  */
 @RestController
 @CrossOrigin
-@RequestMapping("/eduservice/fron/teacher")
-public class FronEduTeacherController {
+@RequestMapping("/eduservice/front/teacher")
+public class FrontEduTeacherController {
 
     @Autowired
     private EduTeacherService eduTeacherService;
+
+
+    //根据讲师id查询课程详情，包括讲师表和讲师所关联的课程表
+    @ApiOperation(value = "讲师详情")
+    @GetMapping("{teacherId}")
+    public R getFrontTeacherItemByTeacherId(@PathVariable("teacherId") Long teacherId){
+
+        //查询讲师表详情信息
+        EduTeacher eduTeacher =eduTeacherService.getById(teacherId);
+
+        //查询讲师所关联的课程表,一个讲师可能会关联多张课程表
+        List<EduCourse> courseList =eduTeacherService.getCourseListByTeacherId(teacherId);
+
+        return R.ok().data("eduTeacher",eduTeacher).data("courseList",courseList);
+
+    }
+
 
     //(currentPage-1)*pageSize  :   从哪个索引开始查
     //pageSize  :   每页有多少条数

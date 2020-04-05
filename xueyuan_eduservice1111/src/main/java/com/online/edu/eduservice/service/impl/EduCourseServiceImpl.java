@@ -1,8 +1,12 @@
 package com.online.edu.eduservice.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.online.edu.eduservice.entity.EduCourse;
 import com.online.edu.eduservice.entity.EduCourseDescription;
+import com.online.edu.eduservice.entity.EduTeacher;
 import com.online.edu.eduservice.entity.dto.CourseFourTableDto;
+import com.online.edu.eduservice.entity.dto.CourseItemsAllDto;
 import com.online.edu.eduservice.entity.form.CourseInfoForm;
 import com.online.edu.eduservice.exception.EduException;
 import com.online.edu.eduservice.mapper.EduCourseMapper;
@@ -15,6 +19,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -36,6 +41,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 
     @Autowired
     private EduVideoService eduVideoService;
+
 
 
     //添加课程信息的方法
@@ -138,5 +144,39 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     public CourseFourTableDto getAllCourseFourTable(String courseId) {
 
         return baseMapper.getCourseFourTableDto(courseId);
+    }
+
+    @Override
+    public HashMap<String, Object> getFrontCourseMap(Page<EduCourse> paramPage) {
+
+
+        baseMapper.selectPage(paramPage,null);
+
+        HashMap<String, Object> frontCourseMap = new HashMap<>();
+
+        long pageCurrent = paramPage.getCurrent();//当前页码
+        long pageSize = paramPage.getSize();//每页有多少条数据
+        long totalPage = paramPage.getPages();//总页数
+        long totalNums = paramPage.getTotal();//总条数
+        List<EduCourse> totalRecords = paramPage.getRecords();//总记录数，所有记录数
+        boolean previous = paramPage.hasPrevious();//是否有前一页
+        boolean next = paramPage.hasNext();//是否有后一页
+
+
+        frontCourseMap.put("pageCurrent",pageCurrent);
+        frontCourseMap.put("pageSize",pageSize);
+        frontCourseMap.put("totalPage",totalPage);
+        frontCourseMap.put("totalNums",totalNums);
+        frontCourseMap.put("totalRecords",totalRecords);
+        frontCourseMap.put("previous",previous);
+        frontCourseMap.put("next",next);
+
+        return frontCourseMap;
+    }
+
+    @Override
+    public CourseItemsAllDto getCourseItemsAllInfo(String courseId) {
+
+        return baseMapper.getCourseItemsAllInfo(courseId);
     }
 }

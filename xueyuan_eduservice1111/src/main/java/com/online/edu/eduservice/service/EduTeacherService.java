@@ -1,11 +1,13 @@
 package com.online.edu.eduservice.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.online.edu.eduservice.entity.EduCourse;
 import com.online.edu.eduservice.entity.EduTeacher;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.online.edu.eduservice.entity.QueryTeacher;
 
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * <p>
@@ -37,4 +39,11 @@ public interface EduTeacherService extends IService<EduTeacher> {
      * @return
      */
     HashMap<String, Object> getFrontTeachersMap(Page<EduTeacher> paramPage);
+
+    /**
+     * 通过讲师id查询课程列表
+     * @param teacherId
+     * @return
+     */
+    List<EduCourse> getCourseListByTeacherId(Long teacherId);
 }

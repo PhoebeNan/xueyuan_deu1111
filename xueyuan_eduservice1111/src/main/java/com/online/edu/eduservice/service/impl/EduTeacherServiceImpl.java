@@ -2,12 +2,15 @@ package com.online.edu.eduservice.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.online.edu.eduservice.entity.EduCourse;
 import com.online.edu.eduservice.entity.EduTeacher;
 import com.online.edu.eduservice.entity.QueryTeacher;
 import com.online.edu.eduservice.mapper.EduTeacherMapper;
+import com.online.edu.eduservice.service.EduCourseService;
 import com.online.edu.eduservice.service.EduTeacherService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -23,6 +26,9 @@ import java.util.List;
  */
 @Service
 public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeacher> implements EduTeacherService {
+
+    @Autowired
+    private EduCourseService eduCourseService;
 
     @Override
     public void getMoreConditionPageList(Page<EduTeacher> page, QueryTeacher queryTeacher) {
@@ -89,5 +95,18 @@ public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeac
         fronTeachersMap.put("next",next);
 
         return fronTeachersMap;
+    }
+
+    @Override
+    public List<EduCourse> getCourseListByTeacherId(Long teacherId) {
+
+        QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
+        //构建条件
+        wrapper.eq("teacher_id",teacherId);
+        wrapper.orderByAsc("gmt_modified");
+
+        List<EduCourse> courseList = eduCourseService.list(wrapper);
+
+        return courseList;
     }
 }

@@ -1,10 +1,13 @@
 package com.online.edu.eduservice.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.online.edu.eduservice.entity.EduCourse;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.online.edu.eduservice.entity.dto.CourseFourTableDto;
+import com.online.edu.eduservice.entity.dto.CourseItemsAllDto;
 import com.online.edu.eduservice.entity.form.CourseInfoForm;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -57,4 +60,19 @@ public interface EduCourseService extends IService<EduCourse> {
      * @return
      */
     CourseFourTableDto getAllCourseFourTable(String courseId);
+
+    /**
+     * 前台系统实现讲师分页功能
+     * @param paramPage
+     * @return
+     */
+    HashMap<String, Object> getFrontCourseMap(Page<EduCourse> paramPage);
+
+
+    /**
+     * 通过课程id查询课程详情信息，包括课程分类表，课程讲师表，课程描述表，课程表
+     * @param courseId
+     * @return
+     */
+    CourseItemsAllDto getCourseItemsAllInfo(String courseId);
 }
